@@ -1,6 +1,6 @@
 # Task Managment REST API | Test Assingment
 
-## Requirments
+## Requirements
 
 - [uv](https://docs.astral.sh/uv/)
 - [docker](https://www.docker.com/)
@@ -45,11 +45,11 @@ uv run pytest
 ## Migrations
 Create a migration file:
 ```bash
-alembic revision --autogenerate -m "message"
+uv run alembic revision --autogenerate -m "message"
 ```
 Apply the latest migrations:
 ```bash
-alembic upgrade head
+uv run alembic upgrade head
 ```
 
 

@@ -49,6 +49,7 @@ async def test_task_repo_update(task_repo: TaskRepository):
     async with get_db() as db:
         [task] = await db.scalars(sql.select(TaskDB))
         assert task.id == task_id
+        assert task.title == TASK_UPDATE.title
 
 
 async def test_task_repo_update__not_found(task_repo: TaskRepository):

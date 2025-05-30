@@ -1,4 +1,7 @@
-from fastapi import APIRouter, Body, HTTPException
+from typing import Annotated
+
+from fastapi import APIRouter, HTTPException
+from fastapi.params import Param
 
 from src.background_task_process import add_task_to_process
 from src.dependencies import TaskRepoDepends
@@ -26,10 +29,10 @@ async def get_task_details(task_repo: TaskRepoDepends, task_id: int) -> TaskDeta
 @router.get("/tasks")
 async def get_tasks(
     task_repo: TaskRepoDepends,
+    page: int = 1,
+    per_page: Annotated[int, Param(le=100)] = 10,
     title: str | None = None,
     status: Status | None = None,
-    page: int = 1,
-    per_page: int = Body(10, le=100),
 ) -> dict[str, list[TaskDetails]]:
     tasks = await task_repo.get_all(
         page=page, per_page=per_page, status=status, title=title

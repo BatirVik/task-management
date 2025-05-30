@@ -1,8 +1,6 @@
-from uuid import uuid4
 
 from fastapi.testclient import TestClient
 
-import json
 from src.repositories import TaskRepository
 from src.schemes import Status, TaskCreate
 
@@ -110,8 +108,8 @@ async def test_get_all_tasks__pagination(client: TestClient, task_repo: TaskRepo
     await task_repo.add_many(MOCK_TASKS_CREATE)
 
     resp = client.get("v1/tasks", params={"page": 2, "per_page": 2})
-
     assert resp.status_code == 200
+
     data = resp.json()
     assert data.keys() == {"tasks"}
     assert {t["title"] for t in data["tasks"]} == {"happy_test", "evil_cat"}
@@ -122,10 +120,9 @@ async def test_update_task(client: TestClient, task_repo: TaskRepository):
 
     resp = client.patch(f"v1/tasks/{task_id}", json={"description": "Balatro"})
     assert resp.status_code == 204
-    assert resp.json() == {"Task not found"}
 
     task = await task_repo.get(task_id)
-    assert None
+    assert task
     assert task.description == "Balatro"
     assert task.created_at != task.updated_at
 

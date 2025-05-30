@@ -55,7 +55,11 @@ class TaskRepository:
 
     async def update(self, task_id: int, task_update: TaskUpdate) -> bool:
         """Returns a boolean value indicating whether the task was found and updated or not."""
-        st = sql.update(TaskDB).where(TaskDB.id == task_id)
+        st = (
+            sql.update(TaskDB)
+            .where(TaskDB.id == task_id)
+            .values(task_update.model_dump(exclude_none=True))
+        )
         res = await self.db.execute(st)
         await self.db.commit()
         return res.rowcount == 1
