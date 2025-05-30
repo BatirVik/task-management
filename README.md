@@ -1,9 +1,9 @@
-# Task Managment REST API | Test Assingment
+# Task Management REST API | Test Assignment
 
 ## Requirements
 
-- [uv](https://docs.astral.sh/uv/)
-- [docker](https://www.docker.com/)
+-  [uv](https://docs.astral.sh/uv/)
+-  [docker](https://www.docker.com/)
 
 ## Run
 
@@ -15,13 +15,13 @@ uv run main.py
 
 ## Environment Variables
 
-- DB_URL
-- PORT (optional)
-- HOST (optional)
+-  DB_URL
+-  PORT (optional)
+-  HOST (optional)
 
 ## Test
 
-Run PostgreSQL container:
+Run the PostgreSQL container:
 ```bash
 docker run -d \
   --name test-pg \
@@ -34,7 +34,7 @@ docker run -d \
 
 Create a file `.env.test` at the root of the project with the content below:
 ```env
-DB_URL="postgresql+psycopg://test:test@localhost:5433/test
+DB_URL="postgresql+psycopg://test:test@localhost:5433/test"
 ```
 
 Run tests:
@@ -51,7 +51,3 @@ Apply the latest migrations:
 ```bash
 uv run alembic upgrade head
 ```
-
-
-
-
